@@ -1,0 +1,42 @@
+<!doctype html>
+
+<html lang="en">
+    <head>
+        <title>Library</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+        <link rel="icon" type="image/x-icon" href="../static/assets/favicon.ico"
+    </head>
+    <body>
+        <h1>Welcome to the [reader] page!</h1>
+        <a href="http://localhost:5000/home">go back to home</a>
+        <h1>{{ book_title }}</h1>
+        <div class="chapter-middle">
+            {% if previous_chapter_id is not none %}
+                <form action="{{ url_for('open_book', book_title=book_title) }}" method="get">
+                    <input type="hidden" name="book_id" value="{{ book_id }}">
+                    <input type="hidden" name="chapter_id" value="{{ previous_chapter_id }}">
+                    <button type="submit"><--</button>
+                </form>
+            {% else %}
+                <button type="button" disabled><--</button>
+            {% endif %}
+
+            <p>{{ chapter_title }}</p>
+
+            {% if next_chapter_id is not none %}
+                <form action="{{ url_for('open_book', book_title=book_title) }}" method="get">
+                    <input type="hidden" name="book_id" value="{{ book_id }}">
+                    <input type="hidden" name="chapter_id" value="{{ next_chapter_id }}">
+                    <button type="submit">--></button>
+                </form>
+            {% else %}
+                <button type="button" disabled>--></button>
+            {% endif %}
+        </div>
+        <div class="book-content">
+            {% for paragraph in paragraphs %}
+                <p>{{ paragraph }}</p>
+            {% endfor %}
+        </div>
+    </body>
+</html>

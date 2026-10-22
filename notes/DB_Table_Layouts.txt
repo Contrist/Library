@@ -1,0 +1,26 @@
+important stuff: so I can identify the book in my library and on royal road
+
+Table 1 (BOOKS): (columns) (row per Book)
+1. book_id                     | normal internal primary key                                     | ID           | Internal Primary Key
+2. fiction_id                  | to find correct book on RoyalRoad                               | String       |
+3. book_title                  | the title of the book                                           | String       |
+4. book_author                 | the author of the book                                          | String       |
+5. book_cover                  | the .jpg of the cover img                                       | BLOB
+6. imported_at                 | when we first "imported" the book                               | DateTime     |
+7. last_update_at              | when we last updated/DB contents changed for this book          | DateTime     |
+
+
+Table 2 (CHAPERS): (columns) (row per chapter)
+1. chapter_id                  | normal internal primary ID                                      | ID           |Internal Primary Key
+2. book_id                     | what book this chapter is in (foreign key)                      | ID           |Foreign Key to BOOKS
+3. chapter_index               | what chapter nummer this is in the book (so we can order)       | Integer      |
+4. chapter_title               | title of that chapter                                           | String       |
+5. chapter_text                | the big one, with all the text                                  | Text         |
+6. released_at                 | gives datetime object of when this chapter came out             | DateTime     |
+
+
+Table 3 (BOOKMARK): (columns) (row per Book)
+1. book_id                     | internal key to get content by book_id                          | ID           | PRIMARY & FOREIGN Key
+2. current_chapter_id          | foreign key to chapter_id                                       | ID           | Foreign Key to CHAPTERS
+3. paragraph_index             | stores the paragraph index                                      | Integer      |
+4. last_read_at                | when you last opened/read this book                             | DateTime     |

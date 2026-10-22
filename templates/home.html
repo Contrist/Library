@@ -1,0 +1,24 @@
+<!doctype html>
+
+<html lang="en">
+    <head>
+        <title>Library</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+        <link rel="icon" type="image/x-icon" href="../static/assets/favicon.ico"
+    </head>
+    <body>
+        <h1 id="home-page">Welcome to Library</h1>
+        <div class="book-grid">
+            {% for book_id, book_title in books %}
+                <div class="book-container">
+                    <a href="{{ url_for('open_book', book_title=book_title, book_id=book_id) }}">
+                        <img src="{{ url_for('book_cover', book_id=book_id) }}" alt="COULD NOT DISPLAY: {{book_title}} ">
+                    </a>
+                    <h3><a href="{{ url_for('open_details', book_title=book_title, book_id=book_id) }}">Details</a></h3>
+                </div>
+            {% else %}
+                <p>no books found :(</p>
+            {% endfor %}
+        </div>
+    </body>
+</html>
